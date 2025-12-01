@@ -546,13 +546,21 @@ document.addEventListener("DOMContentLoaded", () => {
   </article>
 </section>
 
-<!-- 花籃訂購區 -->
 <section id="donate-flower">
-  <h3><strong>致贈花籃，送上祝福</strong></h3>
-  <p><strong>選擇花籃樣式，點選以下LINE與我們聯繫。</strong></p>
-  <a href="https://line.me/ti/p/nZJmE8-b6X" target="_blank" class="btn-order"><strong>加入 LINE 訂購</strong></a>
-  <a href="javascript:void(0);" id="show-flower-baskets" class="btn"><strong>顯示花籃樣式 🌹</strong></a>
+    <h3><strong>致贈花籃，送上祝福</strong></h3>
+    <p><strong>選擇花籃樣式，點選以下LINE與我們聯繫。</strong></p>
+    
+    <div class="donate-btns">
+        <a href="https://line.me/ti/p/nZJmE8-b6X" target="_blank" class="btn-order">
+            <strong>加入 LINE 訂購</strong>
+        </a>
+        <button id="show-flower-baskets" class="btn">
+            <strong>顯示花籃樣式 🌹</strong>
+        </button>
+    </div>
 </section>
+
+
 
 <!-- 花籃畫廊 -->
 <div id="flower-basket-gallery">
@@ -613,12 +621,83 @@ document.addEventListener("DOMContentLoaded", () => {
 .remembrance-thanks p.visible { opacity: 1; transform: translateY(0); }
 .remembrance-thanks p strong { color: #8b5e3c; }
 
-/* ----------- 花籃訂購區 ----------- */
-#donate-flower { text-align:center; margin:20px auto; max-width:500px; padding:20px; border:3px solid #005bb5; border-radius:12px; background-color:#e6f2ff; box-shadow:0 6px 12px rgba(0,0,0,0.15); }
-#donate-flower h3 { font-family:'辰魚落雁體','Noto Serif TC', serif; font-size:29px; color:#00274d; margin-bottom:10px; }
-#donate-flower p { font-size:20px; color:#333; margin-bottom:15px; }
-.btn, .btn-order { display:inline-block; padding:10px 25px; font-size:20px; color:#fff; background-color:#0077e6; border:none; border-radius:6px; text-decoration:none; box-shadow:0 4px 8px rgba(0,0,0,0.1); transition:all 0.3s ease; margin-top:10px; }
-.btn:hover, .btn-order:hover { background-color:#005bb5; transform:translateY(-3px); box-shadow:0 6px 12px rgba(0,0,0,0.2); }
+/* ----------- 花籃訂購區 (修正版) ----------- */
+#donate-flower { 
+    text-align:center; 
+    margin:20px auto; 
+    max-width:500px; 
+    padding:20px; 
+    border:3px solid #005bb5; 
+    border-radius:12px; 
+    background-color:#e6f2ff; 
+    box-shadow:0 6px 12px rgba(0,0,0,0.15); 
+}
+#donate-flower h3 { 
+    /* 使用 CSS 變數或確保字體路徑正確 */
+    font-family: var(--font-display,'辰魚落雁體','Noto Serif TC', serif); 
+    font-size:29px; 
+    color:#00274d; 
+    margin-bottom:10px; 
+}
+
+/* === P 標籤修正：強制不換行，解決斷行問題 === */
+#donate-flower p { 
+    font-family: var(--font-serif); /* 確保使用 Iansui 字體 */
+    font-size:20px; 
+    color:#333; 
+    margin-bottom:20px; /* 增加與按鈕的間距 */
+    
+    white-space: nowrap;          /* 核心修正：強制文字不換行 */
+    overflow: hidden;             /* 隱藏溢出部分 */
+    text-overflow: ellipsis;      /* 溢出時顯示省略號 */
+    display: inline-block;        /* 讓文字截斷屬性生效 */
+    max-width: 95%;               /* 確保文字不會超出邊界 */
+}
+/* ================================================= */
+
+/* 按鈕通用樣式 (略微調整以支援垂直排列) */
+.btn, .btn-order { 
+    display:inline-block; 
+    padding:10px 25px; 
+    font-size:20px; 
+    color:#fff; 
+    background-color:#0077e6; 
+    border:none; 
+    border-radius:6px; 
+    text-decoration:none; 
+    box-shadow:0 4px 8px rgba(0,0,0,0.1); 
+    transition:all 0.3s ease; 
+    /* 移除 margin-top:10px; 交由 .donate-btns 處理間距 */
+}
+
+/* LINE 訂購按鈕顏色 */
+.btn-order {
+    background-color: var(--line-green, #009900);
+}
+
+.btn:hover, .btn-order:hover { 
+    background-color:#005bb5; 
+    transform:translateY(-3px); 
+    box-shadow:0 6px 12px rgba(0,0,0,0.2); 
+}
+
+/* === 新增：垂直堆疊按鈕容器樣式 === */
+.donate-btns {
+    display: flex;
+    flex-direction: column; /* 垂直堆疊按鈕 */
+    gap: 15px;              /* 按鈕間的間距 */
+    align-items: center;    /* 居中對齊 */
+    width: 100%;
+}
+
+/* 確保按鈕在垂直容器內有統一的寬度 */
+.donate-btns .btn, 
+.donate-btns .btn-order {
+    width: 100%;
+    max-width: 250px; /* 限制按鈕最大寬度 */
+    margin: 0;        /* 確保不繼承原有的 margin-top */
+}
+
 
 /* ----------- 花籃畫廊 ----------- */
 #flower-basket-gallery { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:18px; margin-top:20px; opacity:0; max-height:0; overflow:hidden; transition:max-height 0.6s ease, opacity 0.6s ease; }
