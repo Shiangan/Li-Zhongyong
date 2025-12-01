@@ -310,55 +310,83 @@ header h1 {
 /* ========================================================================= */
 /* 7. 致贈花籃 (donate-flower & gallery) */
 /* ========================================================================= */
-#donate-flower {
-    text-align:center;
-    margin:20px auto;
-    max-width:500px;
-    padding:20px;
-    border:3px solid #005bb5;
-    border-radius:12px;
-    background-color:#e6f2ff;
-    box-shadow:0 6px 12px rgba(0,0,0,0.15);
+/* ----------- 花籃訂購區 (修正版) ----------- */
+#donate-flower { 
+    text-align:center; 
+    margin:20px auto; 
+    max-width:500px; 
+    padding:20px; 
+    border:3px solid #005bb5; 
+    border-radius:12px; 
+    background-color:#e6f2ff; 
+    box-shadow:0 6px 12px rgba(0,0,0,0.15); 
 }
-#donate-flower h3 {
-    font-family:var(--font-display);
-    font-size: 29px;
-    color:#00274d;
-    margin-bottom:10px;
-}
-#donate-flower p {
-    font-family: var(--font-serif);
-    font-size: 20px;
-    color:var(--primary-color);
-    margin-bottom:15px;
+#donate-flower h3 { 
+    /* 使用 CSS 變數或確保字體路徑正確 */
+    font-family: var(--font-display,'辰魚落雁體','Noto Serif TC', serif); 
+    font-size:29px; 
+    color:#00274d; 
+    margin-bottom:10px; 
 }
 
-/* 按鈕通用樣式 (btn, btn-order) */
-.btn, .btn-order {
-    display: inline-block;
-    padding: 10px 25px;
-    font-size: 20px;
-    color: #fff;
-    background-color: var(--blue-btn);
-    border: none;
-    border-radius: 6px;
-    text-decoration: none;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
-    margin-top: 10px;
-    cursor: pointer;
-    font-family: var(--font-serif);
+/* === P 標籤修正：強制不換行，解決斷行問題 === */
+#donate-flower p { 
+    font-family: var(--font-serif); /* 確保使用 Iansui 字體 */
+    font-size:20px; 
+    color:#333; 
+    margin-bottom:20px; /* 增加與按鈕的間距 */
+    
+    white-space: nowrap;          /* 核心修正：強制文字不換行 */
+    overflow: hidden;             /* 隱藏溢出部分 */
+    text-overflow: ellipsis;      /* 溢出時顯示省略號 */
+    display: inline-block;        /* 讓文字截斷屬性生效 */
+    max-width: 95%;               /* 確保文字不會超出邊界 */
+}
+/* ================================================= */
+
+/* 按鈕通用樣式 (略微調整以支援垂直排列) */
+.btn, .btn-order { 
+    display:inline-block; 
+    padding:10px 25px; 
+    font-size:20px; 
+    color:#fff; 
+    background-color:#0077e6; 
+    border:none; 
+    border-radius:6px; 
+    text-decoration:none; 
+    box-shadow:0 4px 8px rgba(0,0,0,0.1); 
+    transition:all 0.3s ease; 
+    /* 移除 margin-top:10px; 交由 .donate-btns 處理間距 */
 }
 
+/* LINE 訂購按鈕顏色 */
 .btn-order {
-    background-color: var(--line-green); /* LINE 綠色 */
+    background-color: var(--line-green, #009900);
 }
 
-.btn:hover, .btn-order:hover {
-    background-color: #005bb5;
-    transform: translateY(-3px);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+.btn:hover, .btn-order:hover { 
+    background-color:#005bb5; 
+    transform:translateY(-3px); 
+    box-shadow:0 6px 12px rgba(0,0,0,0.2); 
 }
+
+/* === 新增：垂直堆疊按鈕容器樣式 === */
+.donate-btns {
+    display: flex;
+    flex-direction: column; /* 垂直堆疊按鈕 */
+    gap: 15px;              /* 按鈕間的間距 */
+    align-items: center;    /* 居中對齊 */
+    width: 100%;
+}
+
+/* 確保按鈕在垂直容器內有統一的寬度 */
+.donate-btns .btn, 
+.donate-btns .btn-order {
+    width: 100%;
+    max-width: 250px; /* 限制按鈕最大寬度 */
+    margin: 0;        /* 確保不繼承原有的 margin-top */
+}
+
 
 /* 花籃畫廊 */
 #flower-basket-gallery {
