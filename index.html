@@ -562,6 +562,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+
 <!-- 花籃畫廊 -->
 <div id="flower-basket-gallery">
   <div class="zoomable"><img src="image/花籃A款.JPG" alt="花籃A"><p class="price"><strong>A款NT$2,500/對</strong></p></div>
@@ -622,6 +623,7 @@ document.addEventListener("DOMContentLoaded", () => {
 .remembrance-thanks p strong { color: #8b5e3c; }
 
 /* ----------- 花籃訂購區 (修正版) ----------- */
+/* ----------- 花籃訂購區 (修正版：完整顯示文字 + 垂直按鈕) ----------- */
 #donate-flower { 
     text-align:center; 
     margin:20px auto; 
@@ -640,18 +642,19 @@ document.addEventListener("DOMContentLoaded", () => {
     margin-bottom:10px; 
 }
 
-/* === P 標籤修正：強制不換行，解決斷行問題 === */
+/* === P 標籤修正：允許文字完整換行，並增加間距優化排版 === */
 #donate-flower p { 
     font-family: var(--font-serif); /* 確保使用 Iansui 字體 */
-    font-size:20px; 
+    font-size: clamp(18px, 4vw, 20px); /* 使用 clamp 讓手機上的字體略小，幫助避免過早斷行 */
+    line-height: 1.5; /* 優化行高，使斷行更舒適 */
     color:#333; 
-    margin-bottom:20px; /* 增加與按鈕的間距 */
+    margin-bottom:25px; /* 增加與按鈕的間距 */
     
-    white-space: nowrap;          /* 核心修正：強制文字不換行 */
-    overflow: hidden;             /* 隱藏溢出部分 */
-    text-overflow: ellipsis;      /* 溢出時顯示省略號 */
-    display: inline-block;        /* 讓文字截斷屬性生效 */
-    max-width: 95%;               /* 確保文字不會超出邊界 */
+    white-space: normal; /* 核心修正：允許文字自然換行，確保完整顯示 */
+    overflow: visible;   /* 確保內容不被隱藏 */
+    text-overflow: clip; /* 確保不顯示省略號 */
+    display: block;
+    max-width: 100%;
 }
 /* ================================================= */
 
@@ -681,7 +684,7 @@ document.addEventListener("DOMContentLoaded", () => {
     box-shadow:0 6px 12px rgba(0,0,0,0.2); 
 }
 
-/* === 新增：垂直堆疊按鈕容器樣式 === */
+/* === 新增：垂直堆疊按鈕容器樣式 (推薦搭配 HTML 修正) === */
 .donate-btns {
     display: flex;
     flex-direction: column; /* 垂直堆疊按鈕 */
@@ -697,6 +700,7 @@ document.addEventListener("DOMContentLoaded", () => {
     max-width: 250px; /* 限制按鈕最大寬度 */
     margin: 0;        /* 確保不繼承原有的 margin-top */
 }
+
 
 
 /* ----------- 花籃畫廊 ----------- */
